@@ -1,0 +1,67 @@
+QUESTION 1:  Move Zeroes
+Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+Note that you must do this in-place without making a copy of the array.
+
+Example 1:
+Input: nums = [0,1,0,3,12]
+Output: [1,3,12,0,0]
+
+Example 2:
+Input: nums = [0]
+Output: [0]
+
+Constraints:
+a. 1 <= nums.length <= 10^4
+b. -2^31 <= nums[i] <= 2^31 - 1
+
+solution:
+def moveZeroes(nums):
+    nonZeroPos = 0
+    # Iterate through the array
+    for i in range(len(nums)):
+        # If the current element is non-zero, swap it with the element at the nonZeroPos and increment nonZeroPos
+        if nums[i] != 0:
+            nums[i], nums[nonZeroPos] = nums[nonZeroPos], nums[i]
+            nonZeroPos += 1
+
+    return nums
+QUESTION 2: First Unique Character in a String
+
+Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+
+Example 1:
+Input: s = "leetcode"
+Output: 0
+
+Example 2:
+Input: s = "loveleetcode"
+Output: 2
+
+Example 3:
+Input: s = "aabb"
+Output: -1
+
+Constraints:
+a. 1 <= s.length <= 10^5
+b. s consists of only lowercase English letters.
+
+SOLUTION:
+def firstUniqChar(s):
+
+    # Create a dictionary to store the count of each character
+    charCount = {}
+
+    # Iterate through the string and count the occurrences of each character
+    for char in s:
+        charCount[char] = charCount.get(char, 0) + 1
+
+    # Iterate through the string again to find the first non-repeating character
+    for i in range(len(s)):
+        if charCount[s[i]] == 1:
+            return i
+
+    # If no non-repeating character is found, return -1
+    return -1
+
+
