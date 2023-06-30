@@ -1,0 +1,137 @@
+solution1:
+def convert_to_2d_array(original, m, n):
+    if len(original) != m * n:
+        return []
+
+    result = [[0] * n for _ in range(m)]
+    for i in range(len(original)):
+        row = i // n
+        col = i % n
+        result[row][col] = original[i]
+
+    return result
+  original = [1, 2, 3, 4]
+m = 2
+n = 2
+result = convert_to_2d_array(original, m, n)
+print(result)
+[[1, 2], [3, 4]]
+
+solution2:
+def count_complete_rows(n):
+    row = 0
+    total = 0
+    for i in range(1, n + 1):
+        total += i
+        if total <= n:
+            row += 1
+        else:
+            break
+    return row
+n = 5
+result = count_complete_rows(n)
+print(result)
+
+Solution3:
+def sorted_squares(nums):
+    result = []
+    for num in nums:
+        result.append(num * num)
+    result.sort()
+    return result
+nums = [-4, -1, 0, 3, 10]
+result = sorted_squares(nums)
+print(result)
+[0, 1, 9, 16, 100]
+
+Solution4:
+def find_missing_numbers(nums1, nums2):
+    set1 = set(nums1)
+    set2 = set(nums2)
+    not_in_nums2 = [num for num in nums1 if num not in set2]
+    not_in_nums1 = [num for num in nums2 if num not in set1]
+    return [not_in_nums1, not_in_nums2]
+nums1 = [1, 2, 3]
+nums2 = [2, 4, 6]
+result = find_missing_numbers(nums1, nums2)
+print(result)
+[[4, 6], [1, 3]]
+
+Solution5:
+def distance_value(arr1, arr2, d):
+    distance = 0
+    for num1 in arr1:
+        found = False
+        for num2 in arr2:
+            if abs(num1 - num2) <= d:
+                found = True
+                break
+        if not found:
+            distance += 1
+    return distance
+arr1 = [4, 5, 8]
+arr2 = [10, 9, 1, 8]
+d = 2
+result = distance_value(arr1, arr2, d)
+print(result)
+
+Solution6:
+def find_duplicates(nums):
+    result = []
+    for num in nums:
+        index = abs(num) - 1
+        if nums[index] > 0:
+            nums[index] = -nums[index]
+        else:
+            result.append(abs(num))
+    return result
+nums = [4, 3, 2, 7, 8, 2, 3, 1]
+result = find_duplicates(nums)
+print(result)
+[2, 3]
+
+Solution7:
+def find_min(nums):
+    left = 0
+    right = len(nums) - 1
+
+    while left < right:
+        mid = (left + right) // 2
+        if nums[mid] < nums[mid - 1]:
+            return nums[mid]
+        elif nums[mid] > nums[right]:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return nums[0]
+nums = [3, 4, 5, 1, 2]
+result = find_min(nums)
+print(result)
+1
+
+Solution8:
+from collections import Counter
+
+def find_original(changed):
+    count = Counter(changed)
+    changed.sort()
+
+    for num in changed:
+        if count[num] == 0:
+            return []
+
+        count[num] -= 1
+
+    original = []
+    for num in changed:
+        if count[num] > 0:
+            original.extend([num // 2] * count[num])
+            count[num // 2] -= count[num]
+
+    return original
+changed = [1, 3, 4, 2, 6, 8]
+original = find_original(changed)
+print(original)
+
+
